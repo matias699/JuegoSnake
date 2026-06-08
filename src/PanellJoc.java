@@ -98,19 +98,16 @@ public class PanellJoc extends JPanel implements ActionListener {
             if (direccio == 'L') x[0] -= BLOC;
             if (direccio == 'R') x[0] += BLOC;
 
-
             // Comer manzana
             if (x[0] == pomaX && y[0] == pomaY) {
                 cossos++;
                 generarPoma();
             }
 
-
             // Chocar paredes
             if (x[0] < 0 || x[0] >= TAMANY || y[0] < 0 || y[0] >= TAMANY) {
                 enJoc = false;
             }
-
 
             // Chocar cuerpo
             for (int i = cossos; i > 0; i--) {
@@ -119,46 +116,37 @@ public class PanellJoc extends JPanel implements ActionListener {
                 }
             }
 
-
             // Si pierde, paramos y mostramos el botón
             if (!enJoc) {
                 timer.stop();
-                botoReiniciar.setVisible(true); // Hace visible el botón para usar el ratón
+                botoReiniciar.setVisible(true);
             }
         }
         repaint();
     }
 
-
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-
         if (enJoc) {
-            // Manzana
             g.setColor(Color.RED);
             g.fillRect(pomaX, pomaY, BLOC, BLOC);
 
-
-            // Serpiente
             for (int i = 0; i < cossos; i++) {
                 g.setColor(Color.GREEN);
                 g.fillRect(x[i], y[i], BLOC, BLOC);
             }
         } else {
-            // Game Over
             g.setColor(Color.RED);
             g.drawString("GAME OVER", TAMANY / 3, TAMANY / 2);
         }
     }
 
-
     private class AdaptadorTeclat extends KeyAdapter {
         @Override
         public void keyPressed(KeyEvent e) {
             int tecla = e.getKeyCode();
-
 
             if (tecla == KeyEvent.VK_LEFT && direccio != 'R') direccio = 'L';
             if (tecla == KeyEvent.VK_RIGHT && direccio != 'L') direccio = 'R';

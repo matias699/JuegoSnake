@@ -60,7 +60,6 @@ public class PanellJoc extends JPanel implements ActionListener {
         enJoc = true;
         botoReiniciar.setVisible(false);
 
-
         for (int i = 0; i < cossos; i++) {
             x[i] = 60 - (i * BLOC);
             y[i] = 60;
@@ -75,48 +74,41 @@ public class PanellJoc extends JPanel implements ActionListener {
         repaint();
     }
 
-
     private void generarPoma() {
         Random r = new Random();
         pomaX = r.nextInt(TAMANY / BLOC) * BLOC;
         pomaY = r.nextInt(TAMANY / BLOC) * BLOC;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         if (enJoc) {
-            // Mover cuerpo
+
             for (int i = cossos; i > 0; i--) {
                 x[i] = x[i - 1];
                 y[i] = y[i - 1];
             }
 
-            // Mover cabeza
             if (direccio == 'U') y[0] -= BLOC;
             if (direccio == 'D') y[0] += BLOC;
             if (direccio == 'L') x[0] -= BLOC;
             if (direccio == 'R') x[0] += BLOC;
 
-            // Comer manzana
             if (x[0] == pomaX && y[0] == pomaY) {
                 cossos++;
                 generarPoma();
             }
 
-            // Chocar paredes
             if (x[0] < 0 || x[0] >= TAMANY || y[0] < 0 || y[0] >= TAMANY) {
                 enJoc = false;
             }
 
-            // Chocar cuerpo
             for (int i = cossos; i > 0; i--) {
                 if (x[0] == x[i] && y[0] == y[i]) {
                     enJoc = false;
                 }
             }
 
-            // Si pierde, paramos y mostramos el botón
             if (!enJoc) {
                 timer.stop();
                 botoReiniciar.setVisible(true);

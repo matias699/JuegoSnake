@@ -65,6 +65,8 @@ public class PanellJoc extends JPanel implements ActionListener {
             y[i] = 60;
         }
         generarPoma();
+
+        Main.insertarUsuario("Jugador_Prueba");
     }
 
     private void reiniciarJoc() {
@@ -112,6 +114,9 @@ public class PanellJoc extends JPanel implements ActionListener {
             if (!enJoc) {
                 timer.stop();
                 botoReiniciar.setVisible(true);
+
+                int puntosFinales = cossos - 3;
+                Main.insertarPuntuacion(puntosFinales, 1);
             }
         }
         repaint();

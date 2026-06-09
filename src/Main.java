@@ -32,7 +32,7 @@ public class Main {
             PreparedStatement ps = con.prepareStatement(insertQy);
 
             ps.setInt(1, puntos);
-            ps.setString(2, "2026-06-09");
+            ps.setString(2, "2026-05-14");
             ps.setInt(3, idUsuario);
 
             ps.executeUpdate();
